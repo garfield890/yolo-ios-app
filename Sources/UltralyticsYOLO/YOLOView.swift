@@ -221,7 +221,7 @@ public final class YOLOView: UIView, VideoCaptureDelegate {
     setUpBoundingBoxViews()
     setupUI()
     videoCapture.delegate = self
-    start(position: .back)
+    start(position: .front)
     overlayLayer.frame = bounds
   }
 
