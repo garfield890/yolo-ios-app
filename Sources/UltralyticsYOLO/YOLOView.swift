@@ -221,7 +221,7 @@ public final class YOLOView: UIView, VideoCaptureDelegate {
     setUpBoundingBoxViews()
     setupUI()
     videoCapture.delegate = self
-    start(position: .front)
+    start(position: .back)
     overlayLayer.frame = bounds
   }
 
@@ -1133,12 +1133,22 @@ public final class YOLOView: UIView, VideoCaptureDelegate {
     pausedShareImage = nil
     removePausedImage()
 
-    let currentPosition = videoCapture.captureDevice?.position ?? .back
-    let nextCameraPosition: AVCaptureDevice.Position = currentPosition == .back ? .front : .back
-    let newCameraDevice =
-      nextCameraPosition == .back
-      ? captureDevices(position: .back).first { $0.deviceType == .builtInWideAngleCamera }
-      : bestCaptureDevice(position: nextCameraPosition)
+    let currentDevice = videoCapture.captureDevice
+    let externalDevice: AVCaptureDevice?
+      if #available(iOS 17.0, *) {
+        externalDevice = captureDevices(position: .unspecified).first { $0.deviceType == .external }
+      } else {
+        externalDevice = nil
+      }
+
+    let newCameraDevice: AVCaptureDevice?
+      if currentDevice?.position == .back {
+        newCameraDevice = bestCaptureDevice(position: .front)
+      } else if currentDevice?.position == .front, let external = externalDevice {
+        newCameraDevice = external
+      } else {
+        newCameraDevice = captureDevices(position: .back).first { $0.deviceType == .builtInWideAngleCamera }
+      }
     guard let newCameraDevice else { return }
     switchToCamera(newCameraDevice)
   }

@@ -25,6 +25,8 @@
 		73D95D162D45DA510050E640 /* ModelDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D95D152D45DA510050E640 /* ModelDownloadManager.swift */; };
 		73D95D1B2D45DB800050E640 /* RemoteModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D95D1A2D45DB800050E640 /* RemoteModels.swift */; };
 		73D95D1C2D45DB900050E640 /* ModelSelectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D95D1B2D45DB900050E640 /* ModelSelectionManager.swift */; };
+		73MD00022E3E6418003FA92B /* MoondreamLLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73MD00012E3E6418003FA92B /* MoondreamLLM.swift */; };
+		73TS00022E3E6418003FA92B /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73TS00012E3E6418003FA92B /* TextToSpeech.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		73D95D152D45DA510050E640 /* ModelDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDownloadManager.swift; sourceTree = "<group>"; };
 		73D95D1A2D45DB800050E640 /* RemoteModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteModels.swift; sourceTree = "<group>"; };
 		73D95D1B2D45DB900050E640 /* ModelSelectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSelectionManager.swift; sourceTree = "<group>"; };
+		73MD00012E3E6418003FA92B /* MoondreamLLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoondreamLLM.swift; sourceTree = "<group>"; };
+		73TS00012E3E6418003FA92B /* TextToSpeech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
 		7BCB411721C3096100BFC4D0 /* YOLOiOSApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YOLOiOSApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -71,6 +75,8 @@
 				73D95D152D45DA510050E640 /* ModelDownloadManager.swift */,
 				73D95D1A2D45DB800050E640 /* RemoteModels.swift */,
 				73D95D1B2D45DB900050E640 /* ModelSelectionManager.swift */,
+				73MD00012E3E6418003FA92B /* MoondreamLLM.swift */,
+				73TS00012E3E6418003FA92B /* TextToSpeech.swift */,
 				6323C44D22186177008AE681 /* LaunchScreen.storyboard */,
 				6323C44F22186177008AE681 /* Main.storyboard */,
 				633BC6FA22EDE73D00821BCA /* Settings.bundle */,
@@ -242,6 +248,8 @@
 				737AB2A22E3E6418003FA92B /* ExternalSceneDelegate.swift in Sources */,
 				636EFCAA21E62DD300DE43BC /* ViewController.swift in Sources */,
 				636EFCAB21E62DD300DE43BC /* ViewController+ExternalDisplay.swift in Sources */,
+				73MD00022E3E6418003FA92B /* MoondreamLLM.swift in Sources */,
+				73TS00022E3E6418003FA92B /* TextToSpeech.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

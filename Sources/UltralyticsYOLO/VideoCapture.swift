@@ -31,12 +31,22 @@ func captureDevices(position: AVCaptureDevice.Position) -> [AVCaptureDevice] {
   if position == .front {
     return bestCaptureDevice(position: position).map { [$0] } ?? []
   }
+    
+  var deviceTypes = physicalLensTypes
+  if #available(iOS 17.0, *) {
+    deviceTypes.append(.external)
+  }
 
   let discoverySession = AVCaptureDevice.DiscoverySession(
-    deviceTypes: physicalLensTypes,
+    deviceTypes: deviceTypes,
     mediaType: .video,
     position: position
   )
+    
+  guard !discoverySession.devices.isEmpty else {
+    YOLOLog.warning("No capture devices found")
+    return []
+  }
 
   return discoverySession.devices
     .sorted { $0.deviceType.lensSortOrder < $1.deviceType.lensSortOrder }
