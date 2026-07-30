@@ -4,6 +4,10 @@ trae_config.yml
 *.env
 .env*
 
+# Ignore API secrets
+Secrets.plist
+YOLOiOSApp/YOLOiOSApp/Secrets.plist
+
 
 # Xcode GitIgnore ------------------------------------------------------------------------------------------------------
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore

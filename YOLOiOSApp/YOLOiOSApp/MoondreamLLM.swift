@@ -9,7 +9,19 @@ import Foundation
 import UIKit
 
 struct MoondreamLLM {
-    private let apiKey: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlfaWQiOiJkYzFiNmI4My01ZDc5LTQ4NzEtYTk1ZS1mOGQ0MmY0ZjcyMzUiLCJvcmdfaWQiOiJNd3Q4ajNKb0duSENGWHFkMDhRa3dudlliNDlWVkt5TCIsImlhdCI6MTc4NDI2ODk2OCwidmVyIjoxfQ.5j3XzhUM2l8a37S3uwVFxxNlUGNm62nD7HBpdmivnMw"
+    private var apiKey: String {
+        get {
+            guard let filePath = Bundle.main.path(forResource: "Secrets", ofType: "plist") else {
+                fatalError("Couldn't find file 'Secrets.plist'.")
+            }
+            
+            let plist = NSDictionary(contentsOfFile: filePath)
+            guard let value = plist?.object(forKey: "API_KEY") as? String else {
+                fatalError("Couldn't find key 'API_KEY' in 'Secrets.plist'.")
+            }
+            return value
+        }
+    }
     
     func queryLLM(image: UIImage, prompt: String) async throws -> String {
         guard let imageData = image.jpegData(compressionQuality: 0.8)?.base64EncodedString() else {

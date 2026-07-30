@@ -27,6 +27,7 @@
 		73D95D1C2D45DB900050E640 /* ModelSelectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D95D1B2D45DB900050E640 /* ModelSelectionManager.swift */; };
 		73MD00022E3E6418003FA92B /* MoondreamLLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73MD00012E3E6418003FA92B /* MoondreamLLM.swift */; };
 		73TS00022E3E6418003FA92B /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73TS00012E3E6418003FA92B /* TextToSpeech.swift */; };
+		AD5C132B301C0D7A0032EEB1 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD5C132A301C0D7A0032EEB1 /* Secrets.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		73MD00012E3E6418003FA92B /* MoondreamLLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoondreamLLM.swift; sourceTree = "<group>"; };
 		73TS00012E3E6418003FA92B /* TextToSpeech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
 		7BCB411721C3096100BFC4D0 /* YOLOiOSApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YOLOiOSApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD5C132A301C0D7A0032EEB1 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				632892DF22EB3DB100A12D9C /* Info.plist */,
 				636EFCB821E62E3900DE43BC /* Assets.xcassets */,
 				6323C45122186177008AE681 /* ultralytics_yolo_logotype.png */,
+				AD5C132A301C0D7A0032EEB1 /* Secrets.plist */,
 			);
 			path = YOLOiOSApp;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 			files = (
 				734B44482D42F7CF00D2CA6A /* Models in Resources */,
 				636EFCB921E62E3900DE43BC /* Assets.xcassets in Resources */,
+				AD5C132B301C0D7A0032EEB1 /* Secrets.plist in Resources */,
 				63CF37202514455300E2DEA1 /* Main.storyboard in Resources */,
 				63CF37212514455300E2DEA1 /* ultralytics_yolo_logotype.png in Resources */,
 				63CF371F2514455300E2DEA1 /* LaunchScreen.storyboard in Resources */,
