@@ -762,33 +762,40 @@ extension ViewController {
     }
     
     private func startMoondreamLoop() {
+        scheduleNextMoondreamCapture(delay: 0.5)
+    }
+    
+    private func scheduleNextMoondreamCapture(delay: Double = 0.5) {
         moondreamTimer?.invalidate()
-        moondreamTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
+        moondreamTimer = Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { [weak self] _ in
             self?.captureAndSpeakMoondream()
         }
     }
     
     private func captureAndSpeakMoondream() {
         guard !isQueryingMoondream else { return }
+        guard let image = yoloView.latestImage else {
+            scheduleNextMoondreamCapture(delay: 2.0)
+            return
+        }
         
-        yoloView.capturePhoto { [weak self] image in
-            guard let self = self, let image = image else { return }
-            self.isQueryingMoondream = true
-            
-            Task {
-                do {
-                    let prompt = "Briefly describe what is going on in this image with less detail."
-                    let answer = try await self.moondreamLLM.queryLLM(image: image, prompt: prompt)
-                    
-                    DispatchQueue.main.async {
-                        self.isQueryingMoondream = false
-                        TextToSpeech.shared.speak(answer)
+        self.isQueryingMoondream = true
+        Task {
+            do {
+                let prompt = "Describe the scene in exactly one concise sentence."
+                let answer = try await self.moondreamLLM.queryLLM(image: image, prompt: prompt)
+                
+                DispatchQueue.main.async {
+                    self.isQueryingMoondream = false
+                    TextToSpeech.shared.speak(answer) { [weak self] in
+                        self?.scheduleNextMoondreamCapture(delay: 5.0)
                     }
-                } catch {
-                    DispatchQueue.main.async {
-                        self.isQueryingMoondream = false
-                        print("Moondream error: \(error)")
-                    }
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.isQueryingMoondream = false
+                    print("Moondream error: \(error)")
+                    self.scheduleNextMoondreamCapture(delay: 5.0)
                 }
             }
         }
@@ -797,5 +804,6 @@ extension ViewController {
     private func stopMoondreamLoop() {
         moondreamTimer?.invalidate()
         moondreamTimer = nil
+        TextToSpeech.shared.stop()
     }
 }

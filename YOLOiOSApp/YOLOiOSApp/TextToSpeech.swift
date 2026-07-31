@@ -7,15 +7,20 @@
 
 import AVFoundation
 
-class TextToSpeech {
+class TextToSpeech: NSObject, AVSpeechSynthesizerDelegate, @unchecked Sendable {
     static let shared = TextToSpeech()
     private let synthesizer = AVSpeechSynthesizer()
+    private var onSpeechFinished: (@Sendable () -> Void)?
     
-    init() {
+    override init() {
+        super.init()
+        synthesizer.delegate = self
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: .duckOthers)
     }
     
-    func speak(_ text: String) {
+    func speak(_ text: String, completion: (@Sendable () -> Void)? = nil) {
+        self.onSpeechFinished = completion
+        
         if synthesizer.isSpeaking {
             synthesizer.stopSpeaking(at: .immediate)
         }
@@ -29,7 +34,17 @@ class TextToSpeech {
         synthesizer.speak(utterance)
     }
     
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        onSpeechFinished?()
+        onSpeechFinished = nil
+    }
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        onSpeechFinished = nil
+    }
+    
     func stop() {
+        onSpeechFinished = nil
         synthesizer.stopSpeaking(at: .immediate)
     }
 }
