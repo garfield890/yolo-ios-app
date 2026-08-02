@@ -8,7 +8,7 @@ struct ModelSelectionManager {
   private static let taskSuffixes = ["-seg", "-sem", "-depth", "-cls", "-pose", "-obb"]
 
   enum ModelSize: String, CaseIterable {
-    case n, s, m, l, x
+    case n, s, m, l, x, c
   }
 
   struct ModelInfo {
@@ -18,7 +18,7 @@ struct ModelSelectionManager {
   }
 
   private static let modelSizeRegex = try! NSRegularExpression(
-    pattern: "^\\d+([nsmxl])", options: [])
+    pattern: "^\\d+([nsmxlc])", options: [])
 
   static func categorizeModels(from models: [(name: String, url: URL?, isLocal: Bool)])
     -> [ModelSize: ModelInfo]
